@@ -1,12 +1,11 @@
 package tennis.rules;
 
+import org.apache.log4j.Logger;
 import tennis.players.Player;
-
-import java.util.logging.Logger;
 
 public class Tie2020Rule extends WinningRule {
 
-    private static final Logger LOGGER = Logger.getGlobal();
+    private static final Logger LOGGER = Logger.getLogger("main");
 
     public Tie2020Rule(String id, Player server, Player receiver) {
         super(id, server, receiver);

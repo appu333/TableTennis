@@ -1,16 +1,16 @@
 package tennis;
 
+import org.apache.log4j.Logger;
 import tennis.players.Player;
 import tennis.players.PlayerOne;
 import tennis.players.PlayerTwo;
 import tennis.table.Table;
 import tennis.table.TwoPlayerTable;
 
-import java.util.logging.Logger;
 
 public class Main {
 
-    private static final Logger LOGGER = Logger.getGlobal();
+    private static final Logger LOGGER = Logger.getLogger("main");
 
     public static void main(String... args){
         Player one = new PlayerOne("Player 1");

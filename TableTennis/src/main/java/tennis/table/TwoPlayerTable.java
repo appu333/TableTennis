@@ -1,5 +1,6 @@
 package tennis.table;
 
+import org.apache.log4j.Logger;
 import tennis.players.Player;
 import tennis.rules.Tie1010Rule;
 import tennis.rules.Tie2020Rule;
@@ -9,11 +10,10 @@ import tennis.rules.WinningRule;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 public class TwoPlayerTable implements Table {
 
-    private static final Logger LOGGER = Logger.getGlobal();
+    private static final Logger LOGGER = Logger.getLogger("main");
 
     private List<Player> players;
     private WinningRule currentRule;

@@ -1,12 +1,12 @@
 package tennis.rules;
 
-import tennis.players.Player;
 
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
+import tennis.players.Player;
 
 public class TwoPlayerDefaultRule extends WinningRule {
 
-    private static final Logger LOGGER = Logger.getGlobal();
+    private static final Logger LOGGER = Logger.getLogger("main");
 
     public TwoPlayerDefaultRule(String id, Player server, Player receiver) {
         super(id, server, receiver);
