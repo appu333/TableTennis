@@ -2,10 +2,7 @@ package tennis.table;
 
 import org.apache.log4j.Logger;
 import tennis.players.Player;
-import tennis.rules.Tie1010Rule;
-import tennis.rules.Tie2020Rule;
-import tennis.rules.TwoPlayerDefaultRule;
-import tennis.rules.WinningRule;
+import tennis.rules.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +17,7 @@ public class TwoPlayerTable implements Table {
     private int currentRuleIdx = -1;
     private int server = 0;
     private List<WinningRule> tieRules;
+    private Player lastWinner;
 
     public TwoPlayerTable(Player one, Player two) {
         if(Objects.isNull(one) || Objects.isNull(two))
@@ -27,7 +25,7 @@ public class TwoPlayerTable implements Table {
 
         this.players = Arrays.asList(one, two);
         this.currentRule = new TwoPlayerDefaultRule("FIRST_TO_SCORE_11_RULE", one, two).applyRule(one,two);
-        this.tieRules = Arrays.asList(new Tie1010Rule("TIE_10_10_RULE", one, two), new Tie2020Rule("TIE_20_20_RULE", one, two));
+        this.tieRules = Arrays.asList(new Tie1010Rule("TIE_10_10_RULE", one, two), new Tie2020Rule("TIE_20_20_RULE", one, two), new Tie1515Rule("TIE_15_15_RULE", one, two));
     }
 
     @Override
@@ -80,9 +78,13 @@ public class TwoPlayerTable implements Table {
         if (hasWon(point)) {
             LOGGER.info(players.get(server).getId() + " has won...");
             players.get(server).setScore(players.get(server).getScore() + 1);
+            players.get(server).setLastPoints(point);
+            players.get(server ^ 1).setLastPoints(point ^ 1);
         } else {
             LOGGER.info(players.get(server).getId() + " has lost...");
             players.get(server ^ 1).setScore(players.get(server ^ 1).getScore() + 1);
+            players.get(server).setLastPoints(point ^ 1);
+            players.get(server ^ 1).setLastPoints(point);
         }
     }
 
